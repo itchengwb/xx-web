@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新东方-Okay教育-Request</title>
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="telephone=no" name="format-detection" />
+
+</head>
+
+<body>
+<div >
+    <h1>此页面是VM页面</h1>
+    <p>$str</p>
+    <p>$!str</p>
+    <p>$!{str}</p>
+
+    <p>
+        #if($message)
+            $!message
+        #else
+            hello~,message is null or ""!
+        #end
+    </p>
+
+    <p>
+        #if($url)
+            $!url
+        #end
+    </p>
+</div>
+</body>
+</html>

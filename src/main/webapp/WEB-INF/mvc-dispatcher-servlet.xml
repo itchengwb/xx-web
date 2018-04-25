@@ -1,0 +1,54 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.noriental"/>
+
+    <!--jsp resolver beging add by chengwenbo 2015-12-10 10:38:58 start-->
+   <bean id="JSPviewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+       <property name="contentType" value="text/html;charset=UTF-8"/>
+       <property name="order" value="1"/>
+    </bean>
+
+    <!--velocity config beging add by chengwenbo 2015-11-21 01:41:44 start-->
+    <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="suffix" value=".vm" />
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <!--自定义工具使用-->
+        <!--<property name="toolboxConfigLocation" value="classpath:common/velocity-toolbox.xml"/>-->
+        <property name="cache" value="false"/>
+        <property name="order" value="0"/>
+    </bean>
+    <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="/WEB-INF/velocity" />
+        <property name="configLocation" value="classpath:velocity/velocity.properties" />
+    </bean>
+
+    <!--jackson Add by chengwenbo 2015-11-23 13:20:11 start-->
+    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list >
+                <ref bean="mappingJacksonHttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
+
+    <!--import-->
+    <import resource="classpath*:/spring/applicationContext*.xml"/>
+
+</beans>

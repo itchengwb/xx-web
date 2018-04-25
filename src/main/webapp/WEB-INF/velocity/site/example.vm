@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>新东方-Okay教育-Example</title>
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="telephone=no" name="format-detection" />
+
+</head>
+
+<body>
+<div >
+    <h1>此页面是VM页面</h1>
+    <p>页面设置变量显示如下：</p>
+    #set ($user_name="Chary")
+    My name is $user_name !!!
+
+    <p>以下是Bean对象参数输出：</p>
+    <p>
+        #if($info.msg)
+            $info.msg
+        #else
+            没取到数据error！
+        #end
+    </p>
+
+    <br/>
+    <br/>
+    <p>以下是map参数输出：</p>
+    <p>map.size=$!{info.map.size()}</p>
+    <p>map.size=${info.map.size()}</p>
+    <p>map.size=$info.map.size()</p>
+    <p>map.size=$info.map.size</p>
+    <table border="1">
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+        #if($info.map)
+            #foreach($param in ${info.map.keySet()})
+                <tr>
+                    <td>$param</td>
+                    <td>${info.map.get($param)}</td>
+                </tr>
+            #end
+        #else
+            <tr>
+                <td colspan="2">没获取到map信息</td>
+            </tr>
+        #end
+    </table>
+
+    <br/>
+    <br/>
+    <p>以下是list参数输出：</p>
+
+    <table border="1">
+        #*注意使用感叹号和非感叹号的*#
+        list.size=$!{info.list.size()}<br/>
+        list.size=${info.list.size()}<br/>
+        list.size=$info.list.size()<br/>
+        list.size=$info.list.size<br/>
+        <tr>
+            <th>下标</th>
+            <th>list值</th>
+        </tr>
+        #if($info.list)
+            #foreach($param in ${info.list})
+                <tr>
+                    <td>$!{velocityCount}</td>
+                    <td>$param</td>
+                </tr>
+            #end
+        #else
+            <tr>
+                <td>没获取到list信息</td>
+            </tr>
+        #end
+    </table>
+    <p>${req_art}</p>
+
+</div>
+</body>
+</html>
